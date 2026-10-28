@@ -40,6 +40,7 @@ tema-rengi yesil      # green
 tema-rengi mavi       # blue
 tema-rengi mor        # violet (the original)
 tema-rengi gri        # grey
+tema-rengi cam        # glass: dusk lake wallpaper, soft blue
 ```
 
 The island, dock, widgets, window frames and Glass Files change at once; the GTK and Shell
