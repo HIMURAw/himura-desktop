@@ -1,32 +1,42 @@
 # himura-desktop
 
-My GNOME desktop, in one command: a frosted violet glass look with its own shape (45° cut
-corners, thin lavender lines), a dynamic island in the top bar, a dock, desktop widgets,
-Windows-style snapping, a file manager and a theme for everything else, all switching
-colour together.
+A frosted glass desktop for GNOME 50 with its own shape (45° cut corners, thin lavender
+lines): a dynamic island in the top bar, a dock, desktop widgets, Windows-style snapping, a
+file manager and a theme for everything else, all switching colour together.
+
+**Take all of it, or only the parts you like.** Each part works on its own: only the
+island, only the dock, the widgets with your own theme, anything.
 
 ![Dynamic Island control center](screenshots/island.png)
 
 ```bash
-git clone https://github.com/HIMURAw/himura-desktop
-cd himura-desktop
-./install.sh
+curl -fsSL https://raw.githubusercontent.com/HIMURAw/himura-desktop/main/install.sh | bash
 ```
 
-Then log out and back in.
+It shows the parts with a checkbox each; pick, press Enter, then log out and back in. Or name
+the parts straight away:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/HIMURAw/himura-desktop/main/install.sh | bash -s -- island
+curl -fsSL https://raw.githubusercontent.com/HIMURAw/himura-desktop/main/install.sh | bash -s -- island widgets theme
+```
+
+Prefer to read it first? `git clone https://github.com/HIMURAw/himura-desktop && cd himura-desktop && ./install.sh`
 
 ## What you get
 
-| Part | What it is |
-| --- | --- |
-| [Dynamic Island](https://github.com/HIMURAw/gnome-dynamic-island) | The top bar as a small glass island: control center, notifications, what is playing |
-| [Glass Dock](https://github.com/HIMURAw/gnome-glass-dock) | A dock with magnification, bouncing launches, badges and smart auto-hide |
-| [Glass Widgets](https://github.com/HIMURAw/gnome-glass-widgets) | Desktop widgets: weather, calendar, clock, notes, music, system |
-| [Glass Windows](https://github.com/HIMURAw/glass-windows) | Cut-corner window frames, snap layouts (`Super+Z`), snap assist, `Super`+arrows |
-| [Glass Files](https://github.com/HIMURAw/glass-files) | A file manager laid out like Windows 11 Explorer, in the same look |
-| [Mor theme](https://github.com/HIMURAw/mor-theme) | GTK 3, GTK 4 / libadwaita and GNOME Shell theme, plus `tema-rengi` |
-| [Mor icons](https://github.com/HIMURAw/mor-icons) | Papirus recoloured to the theme |
-| [Away Lock](https://github.com/HIMURAw/gnome-away-lock) | Optional: locks the screen when you walk away (`--with-away-lock`, needs Howdy) |
+| Part | Name to install it | What it is |
+| --- | --- | --- |
+| [Dynamic Island](https://github.com/HIMURAw/gnome-dynamic-island) | `island` | The top bar as a small glass island: control center, notifications, what is playing, side islands |
+| [Glass Dock](https://github.com/HIMURAw/gnome-glass-dock) | `dock` | A dock with magnification, bouncing launches, badges and smart auto-hide |
+| [Glass Widgets](https://github.com/HIMURAw/gnome-glass-widgets) | `widgets` | Desktop widgets: weather, calendar, clock, notes, music, system, network |
+| [Glass Windows](https://github.com/HIMURAw/glass-windows) | `windows` | Cut-corner window frames, snap layouts (`Super+Z`), snap assist, `Super`+arrows |
+| [Glass Files](https://github.com/HIMURAw/glass-files) | `files` | A file manager laid out like Windows 11 Explorer, in the same look |
+| [Mor theme](https://github.com/HIMURAw/mor-theme) + [Mor icons](https://github.com/HIMURAw/mor-icons) | `theme` | GTK 3, GTK 4 / libadwaita and GNOME Shell theme, Papirus recoloured, plus `tema-rengi` |
+| [Away Lock](https://github.com/HIMURAw/gnome-away-lock) | `away-lock` | Locks the screen when you walk away (needs Howdy and a camera; not in `all`) |
+
+`./install.sh all` takes everything but Away Lock; `./install.sh --list` prints the parts.
+Only the packages the chosen parts need are installed.
 
 ![Glass Dock](screenshots/dock.png)
 
@@ -43,7 +53,7 @@ tema-rengi gri        # grey
 tema-rengi cam        # glass: dusk lake wallpaper, soft blue
 ```
 
-The island, dock, widgets, window frames and Glass Files change at once; the GTK and Shell
+`tema-rengi` comes with `theme`. The island, dock, widgets, window frames and Glass Files change at once; the GTK and Shell
 theme, accent colour and wallpaper are rebuilt; the icons are repainted in the background
 (2-3 minutes). If you use them, Zen Browser and Spotify ([Spicetify](https://spicetify.app))
 follow too; see the [Mor theme](https://github.com/HIMURAw/mor-theme) README for those.
@@ -61,22 +71,22 @@ GNOME 49 or older (`--force` lets you try).
 
 ```bash
 ./install.sh --no-deps               # you installed the packages yourself
-./install.sh --with-away-lock        # also Away Lock
-./install.sh --default-file-manager  # Glass Files opens your folders
+./install.sh files --default-file-manager  # Glass Files opens your folders
 ./install.sh --force                 # GNOME other than 50, at your own risk
 ```
 
-The installer turns off docks and top-bar extensions that clash (Ubuntu Dock, Dash to Dock,
-Dash2Dock, Dash to Panel) and tells you which.
+Only when you take the dock or the island, the installer turns off the docks and top bars
+that clash with them (Ubuntu Dock, Dash to Dock, Dash2Dock; Dash to Panel) and tells you which.
 
 Everything lives in your home folder; only the distro packages need `sudo`. Sources go to
-`~/.local/src`; run `./install.sh` again to update.
+`~/.local/src`; run the installer again to update, or to add more parts later.
 
 ## Uninstall
 
 ```bash
-./uninstall.sh           # back to GNOME's own look; sources stay
-./uninstall.sh --purge   # also delete the sources
+./uninstall.sh              # everything, back to GNOME's own look; sources stay
+./uninstall.sh dock         # only some parts
+./uninstall.sh --purge      # also delete the sources
 ```
 
 Your own `~/.config/gtk-4.0/gtk.css`, if you had one, is put back.
